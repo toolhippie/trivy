@@ -1,3 +1,13 @@
+FROM webhippie/golang:latest-arm64v8 AS build
+
+ENV TRIVY_PATH github.com/aquasecurity/trivy
+ENV TRIVY_REPO https://github.com/tboerger/trivy.git
+ENV TRIVY_BRANCH env-variables
+
+RUN git clone -b ${TRIVY_BRANCH} ${TRIVY_REPO} /srv/app/src/${TRIVY_PATH} && \
+  cd /srv/app/src/${TRIVY_PATH} && \
+  GO111MODULE=on go install -ldflags "-X main.version=$(git describe --tags --abbrev=0)" ./cmd/trivy
+
 FROM webhippie/alpine:latest-arm64v8
 
 LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" \
@@ -12,7 +22,4 @@ RUN apk update && \
   apk add git rpm && \
   rm -rf /var/cache/apk/*
 
-RUN wget -q -O- https://github.com/aquasecurity/trivy/releases/download/v0.1.6/trivy_0.1.6_Linux-ARM64.tar.gz | tar xvz -C /tmp/ && \
-	mv /tmp/trivy /usr/bin/trivy && \
-  chmod +x /usr/bin/trivy && \
-  rm -rf /tmp/*
+COPY --from=build /srv/app/bin/trivy /usr/bin/
