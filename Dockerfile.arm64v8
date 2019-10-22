@@ -1,0 +1,18 @@
+FROM webhippie/alpine:latest-arm64v8
+
+LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" \
+  org.label-schema.name="Trivy" \
+  org.label-schema.vendor="Thomas Boerger" \
+  org.label-schema.schema-version="1.0"
+
+ENTRYPOINT ["/usr/bin/trivy"]
+
+RUN apk update && \
+  apk upgrade && \
+  apk add git rpm && \
+  rm -rf /var/cache/apk/*
+
+RUN wget -q -O- https://github.com/aquasecurity/trivy/releases/download/v0.1.6/trivy_0.1.6_Linux-ARM64.tar.gz | tar xvz -C /tmp/ && \
+	mv /tmp/trivy /usr/bin/trivy && \
+  chmod +x /usr/bin/trivy && \
+  rm -rf /tmp/*
