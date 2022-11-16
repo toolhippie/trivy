@@ -1,9 +1,9 @@
 FROM webhippie/golang:1.19 AS build
 
-# renovate: datasource=github-tags depName=aquasecurity/trivy
-ENV TRIVY_VERSION=v0.34.0
+# renovate: datasource=github-releases depName=aquasecurity/trivy
+ENV TRIVY_VERSION=0.34.0
 
-RUN git clone -b ${TRIVY_VERSION} https://github.com/aquasecurity/trivy.git /srv/app/src && \
+RUN git clone -b v${TRIVY_VERSION} https://github.com/aquasecurity/trivy.git /srv/app/src && \
   cd /srv/app/src && \
   GO111MODULE=on go install -ldflags "-X main.version=$(git describe --tags --abbrev=0)" ./cmd/trivy
 

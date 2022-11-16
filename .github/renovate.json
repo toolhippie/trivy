@@ -7,7 +7,7 @@
         {
             "groupName": "trivy packages",
             "matchDatasources": [
-                "github-tags"
+                "github-releases"
             ]
         }
     ]
