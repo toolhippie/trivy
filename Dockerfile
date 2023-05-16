@@ -7,7 +7,7 @@ RUN git clone -b v${TRIVY_VERSION} https://github.com/aquasecurity/trivy.git /sr
   cd /srv/app/src && \
   GO111MODULE=on go install -ldflags "-X main.version=$(git describe --tags --abbrev=0)" ./cmd/trivy
 
-FROM ghcr.io/dockhippie/alpine:3.17
+FROM ghcr.io/dockhippie/alpine:3.18
 ENTRYPOINT [""]
 
 RUN apk update && \
