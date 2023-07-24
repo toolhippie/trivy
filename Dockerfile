@@ -1,7 +1,7 @@
 FROM ghcr.io/dockhippie/golang:1.20 AS build
 
 # renovate: datasource=github-releases depName=aquasecurity/trivy
-ENV TRIVY_VERSION=0.42.1
+ENV TRIVY_VERSION=0.43.1
 
 RUN git clone -b v${TRIVY_VERSION} https://github.com/aquasecurity/trivy.git /srv/app/src && \
   cd /srv/app/src && \
