@@ -5,7 +5,8 @@ ENV TRIVY_VERSION=0.43.1
 
 RUN git clone -b v${TRIVY_VERSION} https://github.com/aquasecurity/trivy.git /srv/app/src && \
   cd /srv/app/src && \
-  GO111MODULE=on go install -ldflags "-X main.version=$(git describe --tags --abbrev=0)" ./cmd/trivy
+  GO111MODULE=on go install -ldflags "-X main.version=$(git describe --tags --abbrev=0)" ./cmd/trivy && \
+  go clean ./...
 
 FROM ghcr.io/dockhippie/alpine:3.18
 ENTRYPOINT [""]
