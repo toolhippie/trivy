@@ -20,7 +20,7 @@ RUN case "${TARGETARCH}" in \
   cd /tmp && \
   tar xvzf trivy.tar.gz
 
-FROM ghcr.io/dockhippie/alpine:3.18
+FROM ghcr.io/dockhippie/alpine:3.20
 ENTRYPOINT [""]
 
 RUN apk update && \
