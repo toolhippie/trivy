@@ -1,4 +1,4 @@
-FROM ghcr.io/dockhippie/golang:1.21 AS build
+FROM ghcr.io/dockhippie/golang:1.23 AS build
 
 # renovate: datasource=github-releases depName=aquasecurity/trivy
 ENV TRIVY_VERSION=0.54.1
