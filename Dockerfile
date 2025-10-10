@@ -1,7 +1,7 @@
 FROM ghcr.io/dockhippie/golang:1.23 AS build
 
 # renovate: datasource=github-releases depName=aquasecurity/trivy
-ENV TRIVY_VERSION=0.67.1
+ENV TRIVY_VERSION=0.67.2
 
 ARG TARGETARCH
 
